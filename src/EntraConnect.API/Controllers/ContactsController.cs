@@ -1,9 +1,6 @@
 ﻿using EntraConnect.API.Models;
-using EntraConnect.API.Utils;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace EntraConnect.API.Controllers
 {
