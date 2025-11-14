@@ -23,8 +23,8 @@ stages:
           buildParameters.TestProjects: "**/*UnitTests/*.csproj"
 
         steps:
-          - script: echo Hello, world!
-            displayName: 'Run a one-line script'
+          - script: echo branch is $(Build.SourceBranch)
+            displayName: 'SourceBranch'
 
           - task: DotNetCoreCLI@2
             displayName: Restore
