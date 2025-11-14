@@ -56,8 +56,6 @@ stages:
     jobs:
       - job: deployToAppService
         displayName: "DeployToAppService - Prod"
-        variables:
-          - group: infosafe-variable-group
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
