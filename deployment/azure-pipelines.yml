@@ -56,7 +56,7 @@ stages:
 
   - stage: deploy_to_dev
     dependsOn: Build
-    condition: $[eq(variables['Build.SourceBranch'], 'refs/heads/develop')]
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
     jobs:
       - job: deployToAppService
         displayName: "DeployToAppService - Prod"
@@ -78,7 +78,7 @@ stages:
 
   - stage: deploy_to_prod
     dependsOn: Build
-    condition: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     jobs:
       - job: deployToAppService
         displayName: "DeployToAppService - Prod"
