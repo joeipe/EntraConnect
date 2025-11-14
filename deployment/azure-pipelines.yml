@@ -59,7 +59,7 @@ stages:
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
     jobs:
       - job: deployToAppService
-        displayName: "DeployToAppService - Prod"
+        displayName: "DeployToAppService - Dev"
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
