@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{CC044440-C888-4D11-B592-09EDB52707B9}"
 	ProjectSection(SolutionItems) = preProject
-		..\deployment\templates\dotnet-webapp-multistage.yml = ..\deployment\templates\dotnet-webapp-multistage.yml
+		..\deployment\templates\x-dotnet-webapp-multistage.yml = ..\deployment\templates\x-dotnet-webapp-multistage.yml
 	EndProjectSection
 EndProject
 Global

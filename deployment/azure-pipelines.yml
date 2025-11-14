@@ -7,6 +7,14 @@ trigger:
   - master
   - develop
 
+resources:
+  repositories:
+    - repository: sharedTemplates                   # alias you choose
+      type: github
+      name: joeipe/azure-pipeline-templates
+      ref: refs/heads/master
+      endpoint: joeipe
+
 stages:
   - template: templates/dotnet-webapp-multistage.yml
     parameters:
