@@ -9,13 +9,13 @@ trigger:
 
 resources:
   repositories:
-    - repository: sharedTemplates                   # alias you choose
+    - repository: sharedTemplates                   # <--- alias (you choose)
       type: github
       name: joeipe/azure-pipeline-templates
       ref: refs/heads/master
-      endpoint: joeipe
+      endpoint: joeipe                              # <--- service connection name
 
 stages:
-  - template: templates/dotnet-webapp-multistage.yml
+  - template: templates/dotnet-webapp-multistage.yml@sharedTemplates
     parameters:
       apiName: 'entraconnect'
