@@ -11,4 +11,3 @@ stages:
   - template: templates/dotnet-webapp-multistage.yml
     parameters:
       apiName: 'entraconnect'
-

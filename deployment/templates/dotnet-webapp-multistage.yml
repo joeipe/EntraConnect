@@ -22,7 +22,7 @@ stages:
           buildParameters.TestProjects: "**/*UnitTests/*.csproj"
 
         steps:
-          - script: echo branch is $(Build.SourceBranch), '${{ parameters.azureSubscription }}-prod-api'
+          - script: echo branch is $(Build.SourceBranch), '${{ parameters.apiName }}-prod-api'
             displayName: 'SourceBranch'
 
           - task: DotNetCoreCLI@2
@@ -71,7 +71,7 @@ stages:
             inputs:
               azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
               appType: 'webAppLinux'
-              appName: '${{ parameters.azureSubscription }}-dev-api'
+              appName: '${{ parameters.apiName }}-dev-api'
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
               appSettings: '-ASPNETCORE_ENVIRONMENT "Development"'
 
@@ -93,7 +93,7 @@ stages:
             inputs:
               azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
               appType: 'webAppLinux'
-              appName: '${{ parameters.azureSubscription }}-prod-api'
+              appName: '${{ parameters.apiName }}-prod-api'
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
               appSettings: '-ASPNETCORE_ENVIRONMENT "Production"'
 
