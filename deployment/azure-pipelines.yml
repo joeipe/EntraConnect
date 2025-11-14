@@ -23,6 +23,9 @@ stages:
           buildParameters.TestProjects: "**/*UnitTests/*.csproj"
 
         steps:
+          - script: echo Hello, world!
+            displayName: 'Run a one-line script'
+
           - task: DotNetCoreCLI@2
             displayName: Restore
             inputs:
@@ -51,7 +54,7 @@ stages:
               pathtoPublish: $(build.ArtifactStagingDirectory)
               targetPath: "drop"
 
-  - stage: deploy_to_prod
+  - stage: deploy_to_dev
     dependsOn: Build
     condition: and(always(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     jobs:
@@ -70,6 +73,28 @@ stages:
               azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
               appType: 'webAppLinux'
               appName: 'entraconnect-dev-api'
+              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              appSettings: '-ASPNETCORE_ENVIRONMENT "Development"'
+
+  - stage: deploy_to_prod
+    dependsOn: Build
+    condition: and(always(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    jobs:
+      - job: deployToAppService
+        displayName: "DeployToAppService - Prod"
+        steps:
+          - task: DownloadBuildArtifacts@1
+            inputs:
+              buildType: "current"
+              downloadType: "single"
+              artifactName: "drop"
+              downloadPath: "$(System.DefaultWorkingDirectory)"
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
+              appType: 'webAppLinux'
+              appName: 'entraconnect-prod-api'
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
               appSettings: '-ASPNETCORE_ENVIRONMENT "Production"'
 
