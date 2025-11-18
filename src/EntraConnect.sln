@@ -13,6 +13,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{CC044440-C888-4D11-B592-09EDB52707B9}"
 	ProjectSection(SolutionItems) = preProject
 		..\deployment\templates\dotnet-webapp-multistage.yml = ..\deployment\templates\dotnet-webapp-multistage.yml
+		terraform-run.yml = terraform-run.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{94B167EA-BBDD-409F-92B7-BA641A6C5538}"
+	ProjectSection(SolutionItems) = preProject
+		..\deployment\infra\.debug-dev.sh = ..\deployment\infra\.debug-dev.sh
+		..\deployment\infra\.debug-prod.sh = ..\deployment\infra\.debug-prod.sh
+		..\deployment\infra\.terraform.lock.hcl = ..\deployment\infra\.terraform.lock.hcl
+		..\deployment\infra\main.tf = ..\deployment\infra\main.tf
+		..\deployment\infra\outputs.tf = ..\deployment\infra\outputs.tf
+		..\deployment\infra\terraform.tfvars = ..\deployment\infra\terraform.tfvars
+		..\deployment\infra\variables.tf = ..\deployment\infra\variables.tf
+		..\deployment\infra\versions.tf = ..\deployment\infra\versions.tf
 	EndProjectSection
 EndProject
 Global
@@ -31,6 +44,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CC044440-C888-4D11-B592-09EDB52707B9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{94B167EA-BBDD-409F-92B7-BA641A6C5538} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B6F10D7-F495-4CF5-91DB-807C590B2144}

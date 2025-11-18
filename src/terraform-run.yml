@@ -1,0 +1,22 @@
+# templates/terraform-run.yml
+parameters:
+  env: ''          # dev | prod
+
+steps:
+  - checkout: self
+
+  - task: Bash@3
+    displayName: "Terraform plan (${{ parameters.env }})"
+    inputs:
+      targetType: inline
+      script: |
+        cd infra
+        ./.debug-${{ parameters.env }}.sh plan
+
+  - task: Bash@3
+    displayName: "Terraform apply (${{ parameters.env }})"
+    inputs:
+      targetType: inline
+      script: |
+        cd infra
+        ./.debug-${{ parameters.env }}.sh apply

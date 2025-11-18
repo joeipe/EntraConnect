@@ -22,7 +22,7 @@ stages:
           buildParameters.TestProjects: "**/*UnitTests/*.csproj"
 
         steps:
-          - script: echo branch is $(Build.SourceBranch), '${{ parameters.apiName }}-prod-api'
+          - script: echo branch is $(Build.SourceBranch), '${{ parameters.apiName }}'
             displayName: 'SourceBranch'
 
           - task: DotNetCoreCLI@2
@@ -57,8 +57,18 @@ stages:
     dependsOn: Build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
     jobs:
+      - job: terraform_dev
+        displayName: "Terraform - Dev"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: templates/terraform-run.yml
+            parameters:
+              env: 'dev'
+
       - job: deployToAppService
         displayName: "DeployToAppService - Dev"
+        dependsOn: terraform_dev
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
@@ -79,6 +89,15 @@ stages:
     dependsOn: Build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     jobs:
+      - job: terraform_dev
+        displayName: "Terraform - Dev"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: templates/terraform-run.yml
+            parameters:
+              env: 'prod'
+
       - job: deployToAppService
         displayName: "DeployToAppService - Prod"
         steps:
