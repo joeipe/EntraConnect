@@ -54,7 +54,7 @@ stages:
               targetPath: "drop"
 
   - stage: deploy_to_dev
-    dependsOn: Build
+    dependsOn: build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
     jobs:
       - job: terraform_dev
@@ -86,11 +86,11 @@ stages:
               appSettings: '-ASPNETCORE_ENVIRONMENT "Development"'
 
   - stage: deploy_to_prod
-    dependsOn: Build
+    dependsOn: build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     jobs:
-      - job: terraform_dev
-        displayName: "Terraform - Dev"
+      - job: terraform_prod
+        displayName: "Terraform - Prod"
         pool:
           vmImage: "ubuntu-latest"
         steps:
@@ -100,6 +100,7 @@ stages:
 
       - job: deployToAppService
         displayName: "DeployToAppService - Prod"
+        dependsOn: terraform_prod
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
