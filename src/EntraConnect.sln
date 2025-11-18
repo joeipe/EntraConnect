@@ -13,7 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{CC044440-C888-4D11-B592-09EDB52707B9}"
 	ProjectSection(SolutionItems) = preProject
 		..\deployment\templates\dotnet-webapp-multistage.yml = ..\deployment\templates\dotnet-webapp-multistage.yml
-		terraform-run.yml = terraform-run.yml
+		..\deployment\templates\terraform-run.yml = ..\deployment\templates\terraform-run.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{94B167EA-BBDD-409F-92B7-BA641A6C5538}"
