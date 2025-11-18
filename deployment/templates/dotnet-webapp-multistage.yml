@@ -62,7 +62,7 @@ stages:
         pool:
           vmImage: "ubuntu-latest"
         steps:
-          - template: templates/terraform-run.yml
+          - template: terraform-run.yml
             parameters:
               env: 'dev'
 
@@ -94,7 +94,7 @@ stages:
         pool:
           vmImage: "ubuntu-latest"
         steps:
-          - template: templates/terraform-run.yml
+          - template: terraform-run.yml
             parameters:
               env: 'prod'
 
