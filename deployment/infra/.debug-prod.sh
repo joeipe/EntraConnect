@@ -18,6 +18,21 @@ terraform init \
   -backend-config="container_name=${BACKEND_STORAGE_CONTAINER}" \
   -backend-config="key=${BACKEND_KEY}"
 
-terraform $*
+# terraform $*
+# dispatch based on first arg
+cmd="$1"
+shift || true
+
+case "$cmd" in
+  plan)
+    terraform plan -input=false "$@"
+    ;;
+  apply)
+    terraform apply -auto-approve -input=false "$@"
+    ;;
+  *)
+    terraform "$cmd" "$@"
+    ;;
+esac
 
 rm -rf .terraform
