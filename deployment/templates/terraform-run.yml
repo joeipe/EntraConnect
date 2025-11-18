@@ -1,6 +1,6 @@
 # templates/terraform-run.yml
 parameters:
-  env: ''          # dev | prod
+  env: "" # dev | prod
 
 steps:
   - checkout: self
@@ -9,7 +9,7 @@ steps:
     displayName: "Terraform plan (${{ parameters.env }})"
     inputs:
       targetType: inline
-      workingDirectory: '$(System.DefaultWorkingDirectory)/deployment/infra'
+      workingDirectory: "$(System.DefaultWorkingDirectory)/deployment/infra"
       script: |
         chmod +x ./.debug-${{ parameters.env }}.sh
         ./.debug-${{ parameters.env }}.sh plan
@@ -18,7 +18,7 @@ steps:
     displayName: "Terraform apply (${{ parameters.env }})"
     inputs:
       targetType: inline
-      workingDirectory: '$(System.DefaultWorkingDirectory)/deployment/infra'
+      workingDirectory: "$(System.DefaultWorkingDirectory)/deployment/infra"
       script: |
         chmod +x ./.debug-${{ parameters.env }}.sh
         ./.debug-${{ parameters.env }}.sh apply
