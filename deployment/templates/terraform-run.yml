@@ -11,6 +11,7 @@ steps:
       targetType: inline
       workingDirectory: '$(System.DefaultWorkingDirectory)/deployment/infra'
       script: |
+        chmod +x ./.debug-${{ parameters.env }}.sh
         ./.debug-${{ parameters.env }}.sh plan
 
   - task: Bash@3
@@ -19,4 +20,5 @@ steps:
       targetType: inline
       workingDirectory: '$(System.DefaultWorkingDirectory)/deployment/infra'
       script: |
+        chmod +x ./.debug-${{ parameters.env }}.sh
         ./.debug-${{ parameters.env }}.sh apply
