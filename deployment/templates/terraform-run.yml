@@ -9,14 +9,14 @@ steps:
     displayName: "Terraform plan (${{ parameters.env }})"
     inputs:
       targetType: inline
+      workingDirectory: '$(System.DefaultWorkingDirectory)/deployment/infra'
       script: |
-        cd infra
         ./.debug-${{ parameters.env }}.sh plan
 
   - task: Bash@3
     displayName: "Terraform apply (${{ parameters.env }})"
     inputs:
       targetType: inline
+      workingDirectory: '$(System.DefaultWorkingDirectory)/deployment/infra'
       script: |
-        cd infra
         ./.debug-${{ parameters.env }}.sh apply
