@@ -1,6 +1,7 @@
 # templates/terraform-run.yml
 parameters:
   env: "" # dev | prod
+  terraformVersion: '1.13.5'
 
 steps:
   - checkout: self
