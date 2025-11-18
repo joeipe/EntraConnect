@@ -71,7 +71,7 @@ stages:
             inputs:
               azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
               appType: 'webAppLinux'
-              appName: '${{ parameters.apiName }}-dev-api'
+              appName: 'app-${{ parameters.apiName }}-dev'
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
               appSettings: '-ASPNETCORE_ENVIRONMENT "Development"'
 
@@ -93,7 +93,7 @@ stages:
             inputs:
               azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
               appType: 'webAppLinux'
-              appName: '${{ parameters.apiName }}-prod-api'
+              appName: 'app-${{ parameters.apiName }}-prod'
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
               appSettings: '-ASPNETCORE_ENVIRONMENT "Production"'
 
