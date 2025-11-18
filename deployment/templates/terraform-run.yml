@@ -6,25 +6,32 @@ parameters:
 steps:
   - checkout: self
 
-  - task: TerraformInstaller@0
-    displayName: "Install Terraform ${{ parameters.terraformVersion }}"
+  - task: AzureCLI@2
+    displayName: "Terraform plan/apply (${{ parameters.env }})"
     inputs:
-      terraformVersion: ${{ parameters.terraformVersion }}
-
-  - task: Bash@3
-    displayName: "Terraform plan (${{ parameters.env }})"
-    inputs:
-      targetType: inline
+      azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
+      scriptType: bash
+      scriptLocation: inlineScript
       workingDirectory: "$(System.DefaultWorkingDirectory)/deployment/infra"
-      script: |
+      inlineScript: |
+        set -e
+
+        TF_VERSION='${{ parameters.terraformVersion }}'
+
+        echo "Installing Terraform ${TF_VERSION}..."
+        curl -L -o terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+        unzip -o terraform.zip
+        sudo mv terraform /usr/local/bin/terraform
+        terraform version
+
+        echo "Current directory: $(pwd)"
+        ls -la
+
+        echo "Making debug script executable..."
         chmod +x ./.debug-${{ parameters.env }}.sh
+
+        echo "Running Terraform plan via .debug-${{ parameters.env }}.sh..."
         ./.debug-${{ parameters.env }}.sh plan
 
-  - task: Bash@3
-    displayName: "Terraform apply (${{ parameters.env }})"
-    inputs:
-      targetType: inline
-      workingDirectory: "$(System.DefaultWorkingDirectory)/deployment/infra"
-      script: |
-        chmod +x ./.debug-${{ parameters.env }}.sh
+        echo "Running Terraform apply via .debug-${{ parameters.env }}.sh..."
         ./.debug-${{ parameters.env }}.sh apply
