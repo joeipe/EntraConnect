@@ -57,8 +57,18 @@ stages:
     dependsOn: build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
     jobs:
+      - job: terraform_dev
+        displayName: "Terraform - Dev"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: terraform-run.yml
+            parameters:
+              env: "dev"
+
       - job: deployToAppService
         displayName: "DeployToAppService - Dev"
+        dependsOn: terraform_dev
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
@@ -79,8 +89,18 @@ stages:
     dependsOn: build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     jobs:
+      - job: terraform_prod
+        displayName: "Terraform - Prod"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: terraform-run.yml
+            parameters:
+              env: "prod"
+
       - job: deployToAppService
         displayName: "DeployToAppService - Prod"
+        dependsOn: terraform_prod
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
