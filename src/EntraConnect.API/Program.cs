@@ -1,9 +1,18 @@
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity;
 using EntraConnect.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//if (!builder.Environment.IsDevelopment())
+{
+    var keyVaultName = builder.Configuration["KeyVaultName"];
+    var options = new AzureKeyVaultConfigurationOptions { ReloadInterval = TimeSpan.FromHours(24) };
+    builder.Configuration
+        .AddAzureKeyVault(new Uri($"https://{keyVaultName}.vault.azure.net/"), new DefaultAzureCredential(), options);
+}
 
 // Add services to the container.
 builder.Services.AddScoped<IContactService, ContactService>();
