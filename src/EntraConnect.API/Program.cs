@@ -1,5 +1,6 @@
 using EntraConnect.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.Authority = builder.Configuration["AzureAD:Authority"];
         options.Audience = builder.Configuration["AzureAD:Audience"];
+        /*
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            //ValidIssuers = new[] {
+            //    //"https://login.microsoftonline.com/919b1bc0-86f7-4318-ae44-edbf236decf8/v2.0",
+            //    "https://919b1bc0-86f7-4318-ae44-edbf236decf8.ciamlogin.com/919b1bc0-86f7-4318-ae44-edbf236decf8/v2.0"
+            //},
+            ValidAudiences = new[] {
+                "api://df2928cf-8d96-4a83-bdbe-c89f8c877ab3",
+                "df2928cf-8d96-4a83-bdbe-c89f8c877ab3"
+            }
+        };
+        */
         options.TokenValidationParameters.ValidateIssuer = false;
     });
 
