@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 //if (!builder.Environment.IsDevelopment())
 {
     var keyVaultName = builder.Configuration["KeyVaultName"];
