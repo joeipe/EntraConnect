@@ -2,7 +2,7 @@
 export ARM_SUBSCRIPTION_ID="57f4859b-8037-4106-ac17-61520b9de19b"
 
 # set the application / environment
-export TF_VAR_application_name="entra-connect"
+export TF_VAR_application_name="entra-connect-2"
 export TF_VAR_environment_name="dev"
 export TF_VAR_environment_full_name="Development"
 

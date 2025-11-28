@@ -10,3 +10,6 @@ variable "primary_location" {
 variable "environment_full_name" {
   type = string
 }
+variable "secret_names" {
+  type = set(string)
+}
