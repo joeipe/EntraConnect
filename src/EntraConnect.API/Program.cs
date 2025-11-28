@@ -6,14 +6,15 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-//if (!builder.Environment.IsDevelopment())
+/*
+if (!builder.Environment.IsDevelopment())
 {
     var keyVaultName = builder.Configuration["KeyVaultName"];
     var options = new AzureKeyVaultConfigurationOptions { ReloadInterval = TimeSpan.FromHours(24) };
     builder.Configuration
         .AddAzureKeyVault(new Uri($"https://{keyVaultName}.vault.azure.net/"), new DefaultAzureCredential(), options);
 }
+*/
 
 // Add services to the container.
 builder.Services.AddScoped<IContactService, ContactService>();
