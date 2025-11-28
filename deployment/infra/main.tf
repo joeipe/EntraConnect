@@ -54,8 +54,8 @@ resource "azurerm_linux_web_app" "webapp" {
     }
   }
   app_settings = {
-    "ASPNETCORE_ENVIRONMENT"          = "Development",
+    "ASPNETCORE_ENVIRONMENT"          = var.environment_full_name,
     "WEBSITE_ENABLE_SYNC_UPDATE_SITE" = "true",
-    "JISecret"                        = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.example_secret.id})"
+    "JISecret"                        = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=JISecret)"
   }
 }
