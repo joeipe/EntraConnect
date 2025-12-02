@@ -49,13 +49,13 @@ resource "azurerm_key_vault" "main" {
   rbac_authorization_enabled = true
 }
 
-resource "azurerm_role_assignment" "terraform_user" {
+resource "azurerm_role_assignment" "terraform_kv_admin_assignment" {
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-resource "azurerm_role_assignment" "terraform_user" {
+resource "azurerm_role_assignment" "terraform_kv_secrets_officer_assignment" {
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secrets Officer"
   principal_id         = data.azurerm_client_config.current.object_id
@@ -67,7 +67,7 @@ resource "azurerm_role_assignment" "webapp_role_assignment" {
   principal_id         = azurerm_linux_web_app.webapp.identity[0].principal_id
 }
 
-resource "azurerm_key_vault_secret" "example_secret" {
+resource "azurerm_key_vault_secret" "webapp_secrets" {
   for_each     = var.secret_names
   name         = each.value
   value        = "initial-placeholder-value"
