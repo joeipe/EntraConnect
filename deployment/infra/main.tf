@@ -55,6 +55,12 @@ resource "azurerm_role_assignment" "terraform_user" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
+resource "azurerm_role_assignment" "terraform_user" {
+  scope                = azurerm_key_vault.main.id
+  role_definition_name = "Key Vault Secrets Officer"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
 resource "azurerm_role_assignment" "webapp_role_assignment" {
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secrets User"

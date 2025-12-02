@@ -1,7 +1,7 @@
 # templates/terraform-run.yml
 parameters:
   env: "" # dev | prod
-  terraformVersion: '1.13.5'
+  terraformVersion: "1.13.5"
 
 steps:
   - checkout: self
@@ -9,7 +9,7 @@ steps:
   - task: AzureCLI@2
     displayName: "Terraform plan/apply (${{ parameters.env }})"
     inputs:
-      azureSubscription: 'Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)'
+      azureSubscription: "Personal-Sub(1)(57f4859b-8037-4106-ac17-61520b9de19b)"
       scriptType: bash
       scriptLocation: inlineScript
       workingDirectory: "$(System.DefaultWorkingDirectory)/deployment/infra"
