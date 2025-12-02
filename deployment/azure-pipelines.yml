@@ -8,9 +8,9 @@ trigger:
   - develop
 
 stages:
-  - template: templates/dotnet-webapp-multistage.yml
+  - template: templates/dotnet-webapp-multistage-infra.yml
     parameters:
-      apiName: "entra-connect-2"
+      apiName: "entra-connect-3"
 
 # resources:
 #   repositories:
